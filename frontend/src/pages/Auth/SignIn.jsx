@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaEyeSlash } from "react-icons/fa";
+import { FaEyeSlash, FaEye } from "react-icons/fa";
 const SignIn = () => {
   const [seePassword, setSeePassword] = useState(false);
   return (
@@ -122,16 +122,18 @@ const SignIn = () => {
                   Password
                 </label>
 
-                <div className="relative">
+                <div className="relative flex items-center">
                   <input
                     id="Password"
                     type={seePassword ? "text" : "password"}
                     name="password"
-                    className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm p-2"
+                    className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm p-2 pr-10"
                   />
-                  <span className="absolute">
-                    {" "}
-                    <FaEyeSlash />
+                  <span
+                    className="absolute right-3 cursor-pointer"
+                    onClick={() => setSeePassword(!seePassword)}
+                  >
+                    {seePassword ? <FaEye /> : <FaEyeSlash />}
                   </span>
                 </div>
               </div>
@@ -143,15 +145,21 @@ const SignIn = () => {
                 >
                   Password Confirmation
                 </label>
-
-                <input
-                  type={seePassword ? "text" : "password"}
-                  id="PasswordConfirmation"
-                  name="password_confirmation"
-                  className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm p-2"
-                />
+                <div className="relative flex items-center">
+                  <input
+                    type={seePassword ? "text" : "password"}
+                    id="PasswordConfirmation"
+                    name="password_confirmation"
+                    className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm p-2"
+                  />
+                  <span
+                    className="absolute right-3 cursor-pointer"
+                    onClick={() => setSeePassword(!seePassword)}
+                  >
+                    {seePassword ? <FaEye /> : <FaEyeSlash />}
+                  </span>
+                </div>
               </div>
-
               <div className="col-span-6">
                 <label htmlFor="MarketingAccept" className="flex gap-4">
                   <input
