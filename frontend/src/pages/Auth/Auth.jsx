@@ -15,6 +15,16 @@ const Auth = () => {
 
   const onSignUpHandler = async (e) => {
     e.preventDefault();
+
+    if (user.password < 6) {
+      toast.warning("Password must be at least 6");
+      return;
+    }
+    if (user.password !== user.confirmPassword) {
+      toast.warning("Password mismatch.");
+      return;
+    }
+
     try {
       const response = await axios.post(
         `http://${REACT_IP}:${SERVER_PORT}/auth/create`,
@@ -31,7 +41,8 @@ const Auth = () => {
       toast.success("Sign up successfully.");
       setIsAuthPage(false);
     } catch (error) {
-      toast.error("Unable to Signup.");
+      console.log(error);
+      toast.error(error?.response?.data?.message);
     }
   };
 
@@ -52,7 +63,8 @@ const Auth = () => {
       }));
       toast.success("Sign in successfully.");
     } catch (error) {
-      toast.error("Unable to Signin.");
+      console.log(error?.response?.data?.message);
+      toast.error(error?.response?.data?.message);
     }
   };
 
