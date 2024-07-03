@@ -56,9 +56,9 @@ const SignIn = ({ setIsAuthPage, setUser, user, onLoginHandler }) => {
                   type="email"
                   id="Email"
                   required
-                  value={user.userName}
+                  value={user.email}
                   onChange={(e) =>
-                    setUser((prev) => ({ ...prev, userName: e.target.value }))
+                    setUser((prev) => ({ ...prev, email: e.target.value }))
                   }
                   name="email"
                   className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm p-2"
