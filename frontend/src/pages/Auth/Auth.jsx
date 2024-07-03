@@ -4,6 +4,7 @@ import SignIn from "./SignIn";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { REACT_IP, SERVER_PORT } from "../../services/common";
+import { useNavigate } from "react-router-dom";
 const Auth = () => {
   const [isAuthPage, setIsAuthPage] = useState(false);
   const [user, setUser] = useState({
@@ -12,6 +13,7 @@ const Auth = () => {
     password: "",
     confirmPassword: "",
   });
+  const navigate = useNavigate();
 
   const onSignUpHandler = async (e) => {
     e.preventDefault();
@@ -62,6 +64,8 @@ const Auth = () => {
         confirmPassword: "",
       }));
       toast.success("Sign in successfully.");
+      localStorage.setItem("user", JSON.stringify("login"));
+      navigate("/");
     } catch (error) {
       console.log(error?.response?.data?.message);
       toast.error(error?.response?.data?.message);

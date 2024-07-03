@@ -13,7 +13,8 @@ const SignUp = ({ setIsAuthPage, setUser, user, onSignUpHandler }) => {
           />
 
           <div className="hidden lg:relative lg:block lg:p-12">
-            <a className="block text-white" href="#">
+            <a className="block text-white" 
+            >
               <span className="sr-only">Home</span>
               <svg
                 className="h-8 sm:h-10"
@@ -39,7 +40,8 @@ const SignUp = ({ setIsAuthPage, setUser, user, onSignUpHandler }) => {
             <div className="relative -mt-16 block lg:hidden">
               <a
                 className="inline-flex size-16 items-center justify-center rounded-full bg-white text-blue-600 sm:size-20"
-                href="#"
+                
+                
               >
                 <span className="sr-only">Home</span>
                 <svg
@@ -206,12 +208,14 @@ const SignUp = ({ setIsAuthPage, setUser, user, onSignUpHandler }) => {
               <div className="col-span-6">
                 <p className="text-sm text-gray-500">
                   By creating an account, you agree to our
-                  <a href="#" className="text-gray-700 underline">
+                  <a 
+                   className="text-gray-700 underline">
                     {" "}
                     terms and conditions{" "}
                   </a>
                   and
-                  <a href="#" className="text-gray-700 underline">
+                  <a 
+                   className="text-gray-700 underline">
                     privacy policy
                   </a>
                   .
