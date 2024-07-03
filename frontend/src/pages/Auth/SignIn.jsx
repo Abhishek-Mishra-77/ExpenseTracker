@@ -1,5 +1,7 @@
-// eslint-disable-next-line react/prop-types
-const SignIn = ({ setIsAuthPage }) => {
+import { useState } from "react";
+import { FaEyeSlash, FaEye } from "react-icons/fa";
+const SignIn = ({ setIsAuthPage, setUser, user, onLoginHandler }) => {
+  const [seePassword, setSeePassword] = useState(false);
   return (
     <section className="bg-white">
       <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
@@ -37,7 +39,10 @@ const SignIn = ({ setIsAuthPage }) => {
               nam dolorum aliquam, quibusdam aperiam voluptatum.
             </p>
 
-            <form action="#" className="mt-8 grid grid-cols-6 gap-6">
+            <form
+              onSubmit={onLoginHandler}
+              className="mt-8 grid grid-cols-6 gap-6"
+            >
               <div className="col-span-6">
                 <label
                   htmlFor="Email"
@@ -50,25 +55,34 @@ const SignIn = ({ setIsAuthPage }) => {
                 <input
                   type="email"
                   id="Email"
+                  required
+                  value={user.userName}
+                  onChange={(e) =>
+                    setUser((prev) => ({ ...prev, userName: e.target.value }))
+                  }
                   name="email"
                   className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm p-2"
                 />
               </div>
 
-              <div className="col-span-6">
-                <label
-                  htmlFor="Password"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Password{" "}
-                </label>
-
+              <div className="relative flex items-center w-full col-span-6">
                 <input
-                  type="password"
                   id="Password"
+                  required
+                  value={user.password}
+                  onChange={(e) =>
+                    setUser((prev) => ({ ...prev, password: e.target.value }))
+                  }
+                  type={seePassword ? "text" : "password"}
                   name="password"
                   className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm p-2"
                 />
+                <span
+                  className="absolute right-3 cursor-pointer"
+                  onClick={() => setSeePassword(!seePassword)}
+                >
+                  {seePassword ? <FaEye /> : <FaEyeSlash />}
+                </span>
               </div>
 
               <div className="col-span-6">

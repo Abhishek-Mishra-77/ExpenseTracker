@@ -3,12 +3,39 @@ import SignUp from "./SignUp";
 import SignIn from "./SignIn";
 const Auth = () => {
   const [isAuthPage, setIsAuthPage] = useState(false);
+  const [user, setUser] = useState({
+    userName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const onSignUpHandler = async (e) => {
+    e.preventDefault();
+    console.log(user);
+  };
+
+  const onLoginHandler = async (e) => {
+    e.preventDefault();
+    console.log(user);
+  };
+
   return (
     <>
       {isAuthPage ? (
-        <SignUp setIsAuthPage={setIsAuthPage} />
+        <SignUp
+          setUser={setUser}
+          user={user}
+          setIsAuthPage={setIsAuthPage}
+          onSignUpHandler={onSignUpHandler}
+        />
       ) : (
-        <SignIn setIsAuthPage={setIsAuthPage} />
+        <SignIn
+          onLoginHandler={onLoginHandler}
+          user={user}
+          setUser={setUser}
+          setIsAuthPage={setIsAuthPage}
+        />
       )}
     </>
   );

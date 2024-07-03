@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
-// eslint-disable-next-line react/prop-types
-const SignUp = ({ setIsAuthPage }) => {
+const SignUp = ({ setIsAuthPage, setUser, user, onSignUpHandler }) => {
   const [seePassword, setSeePassword] = useState(false);
   return (
     <section className="bg-white">
@@ -66,7 +65,10 @@ const SignUp = ({ setIsAuthPage }) => {
               </p>
             </div>
 
-            <form action="#" className="mt-8 grid grid-cols-6 gap-6">
+            <form
+              onSubmit={onSignUpHandler}
+              className="mt-8 grid grid-cols-6 gap-6"
+            >
               <div className="col-span-6 sm:col-span-3">
                 <label
                   htmlFor="FirstName"
@@ -78,6 +80,11 @@ const SignUp = ({ setIsAuthPage }) => {
                 <input
                   type="text"
                   id="FirstName"
+                  required
+                  value={user.userName}
+                  onChange={(e) =>
+                    setUser((prev) => ({ ...prev, userName: e.target.value }))
+                  }
                   name="first_name"
                   className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm p-2"
                 />
@@ -93,6 +100,7 @@ const SignUp = ({ setIsAuthPage }) => {
 
                 <input
                   type="text"
+                  required
                   id="LastName"
                   name="last_name"
                   className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm p-2"
@@ -110,6 +118,11 @@ const SignUp = ({ setIsAuthPage }) => {
                 <input
                   type="email"
                   id="Email"
+                  required
+                  value={user.email}
+                  onChange={(e) =>
+                    setUser((prev) => ({ ...prev, email: e.target.value }))
+                  }
                   name="email"
                   className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm p-2"
                 />
@@ -126,6 +139,11 @@ const SignUp = ({ setIsAuthPage }) => {
                 <div className="relative flex items-center">
                   <input
                     id="Password"
+                    required
+                    value={user.password}
+                    onChange={(e) =>
+                      setUser((prev) => ({ ...prev, password: e.target.value }))
+                    }
                     type={seePassword ? "text" : "password"}
                     name="password"
                     className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm p-2 pr-10"
@@ -148,6 +166,14 @@ const SignUp = ({ setIsAuthPage }) => {
                 </label>
                 <div className="relative flex items-center">
                   <input
+                    value={user.confirmPassword}
+                    required
+                    onChange={(e) =>
+                      setUser((prev) => ({
+                        ...prev,
+                        confirmPassword: e.target.value,
+                      }))
+                    }
                     type={seePassword ? "text" : "password"}
                     id="PasswordConfirmation"
                     name="password_confirmation"
@@ -199,12 +225,12 @@ const SignUp = ({ setIsAuthPage }) => {
 
                 <p className="mt-4 text-sm text-gray-500 sm:mt-0">
                   Already have an account?
-                  <button
+                  <a
                     onClick={() => setIsAuthPage(false)}
                     className="text-gray-700 underline"
                   >
                     Log in
-                  </button>
+                  </a>
                 </p>
               </div>
             </form>
