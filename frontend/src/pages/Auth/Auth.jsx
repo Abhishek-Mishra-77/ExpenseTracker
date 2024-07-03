@@ -1,10 +1,15 @@
-import SignIn from "./SignIn";
+import { useState } from "react";
 import SignUp from "./SignUp";
+import SignIn from "./SignIn";
 const Auth = () => {
+  const [isAuthPage, setIsAuthPage] = useState(false);
   return (
     <>
-      <SignIn />
-      <SignUp />
+      {isAuthPage ? (
+        <SignUp setIsAuthPage={setIsAuthPage} />
+      ) : (
+        <SignIn setIsAuthPage={setIsAuthPage} />
+      )}
     </>
   );
 };
