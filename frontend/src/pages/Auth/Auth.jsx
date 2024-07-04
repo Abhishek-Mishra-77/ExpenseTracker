@@ -65,7 +65,7 @@ const Auth = () => {
       }));
       toast.success("Sign in successfully.");
       localStorage.setItem("user", JSON.stringify("login"));
-      navigate("/");
+      navigate("/expense");
     } catch (error) {
       console.log(error?.response?.data?.message);
       toast.error(error?.response?.data?.message);

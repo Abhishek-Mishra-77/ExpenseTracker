@@ -230,7 +230,16 @@ const SignUp = ({ setIsAuthPage, setUser, user, onSignUpHandler }) => {
                 <p className="mt-4 text-sm text-gray-500 sm:mt-0">
                   Already have an account?
                   <a
-                    onClick={() => setIsAuthPage(false)}
+                    onClick={() => {
+                      setUser((prev) => ({
+                        ...prev,
+                        userName: "",
+                        email: "",
+                        password: "",
+                        confirmPassword: "",
+                      }));
+                      setIsAuthPage(false);
+                    }}
                     className="text-gray-700 underline"
                   >
                     Log in

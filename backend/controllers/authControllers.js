@@ -20,6 +20,7 @@ const signUpuser = async (req, res) => {
       userName,
       email,
       password: hashedPassword,
+      isCompleted: false,
     });
 
     if (!user) {

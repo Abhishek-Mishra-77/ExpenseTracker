@@ -11,8 +11,8 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/auth" element={<Auth />} />
-      {isLogin && <Route path="/" element={<Home />} />}
+      <Route path="/" element={<Auth />} />
+      {isLogin && <Route path="/expense" element={<Home />} />}
       {/* <Route path="*" element={<Auth />} /> */}
     </Routes>
   );

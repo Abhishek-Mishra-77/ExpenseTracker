@@ -15,7 +15,7 @@ const SignIn = ({ setIsAuthPage, setUser, user, onLoginHandler }) => {
 
         <main className="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6">
           <div className="max-w-xl lg:max-w-3xl">
-            <a className="block text-blue-600" >
+            <a className="block text-blue-600">
               <span className="sr-only">Home</span>
               <svg
                 className="h-8 sm:h-10"
@@ -88,17 +88,12 @@ const SignIn = ({ setIsAuthPage, setUser, user, onLoginHandler }) => {
               <div className="col-span-6">
                 <p className="text-sm text-gray-500">
                   By creating an account, you agree to our
-                  <a 
-                   className="text-gray-700 underline">
+                  <a className="text-gray-700 underline">
                     {" "}
                     terms and conditions{" "}
                   </a>
                   and
-                  <a 
-                   className="text-gray-700 underline">
-                    privacy policy
-                  </a>
-                  .
+                  <a className="text-gray-700 underline">privacy policy</a>.
                 </p>
               </div>
 
@@ -110,7 +105,16 @@ const SignIn = ({ setIsAuthPage, setUser, user, onLoginHandler }) => {
                 <p className="mt-4 text-sm text-gray-500 sm:mt-0">
                   {" Don't have an account?"}
                   <button
-                    onClick={() => setIsAuthPage(true)}
+                    onClick={() => {
+                      setUser((prev) => ({
+                        ...prev,
+                        userName: "",
+                        email: "",
+                        password: "",
+                        confirmPassword: "",
+                      }));
+                      setIsAuthPage(true);
+                    }}
                     className="text-gray-700 underline"
                   >
                     {" "}
