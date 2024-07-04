@@ -1,41 +1,14 @@
-import React, { useState } from "react";
 import { FaPlus } from "react-icons/fa6";
 import { FaDownload } from "react-icons/fa";
 import AddExpense from "../AddExpenses/AddExpense";
-import { toast } from "react-toastify";
-import axios from "axios";
-import { REACT_IP, SERVER_PORT } from "../../services/common";
 
-const QuickAccess = () => {
-  const [expense, setExpense] = useState({
-    title: "",
-    amount: "",
-    description: "",
-    category: "",
-  });
-  const [newExpenseModal, setNewExpenseModal] = useState(false);
-
-  const onExpenseSubmitHandler = async (e) => {
-    e.preventDefault();
-    try {
-      await axios.post(`http://${REACT_IP}:${SERVER_PORT}/expense/addexpense`, {
-        expense,
-      });
-      toast.success("Expense added successfully.");
-      setNewExpenseModal(false);
-      setExpense((prev) => ({
-        ...prev,
-        title: "",
-        amount: "",
-        description: "",
-        category: "",
-      }));
-    } catch (error) {
-      console.log(error);
-      toast.error("Some");
-    }
-  };
-
+const QuickAccess = ({
+  setNewExpenseModal,
+  newExpenseModal,
+  setExpense,
+  expense,
+  onExpenseSubmitHandler,
+}) => {
   return (
     <div>
       <div className="h-80 rounded-lg bg-gray-200 ">

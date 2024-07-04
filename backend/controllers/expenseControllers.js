@@ -32,4 +32,21 @@ const allExpenses = async (req, res) => {
   }
 };
 
-export { addExpense, allExpenses };
+const removeExpense = async (req, res) => {
+  const expenseId = req.params.id;
+  try {
+    const removedExpense = await Expense.findOne({ where: { id: expenseId } });
+
+    if (!removedExpense) {
+      return res.status(404).json({ message: "Expense Not found." });
+    }
+
+    await Expense.destroy({ where: { id: expenseId } });
+
+    return res.status(200).json({ message: "Expense removed successfully" });
+  } catch (error) {
+    return res.status(404).json({ error: error.message });
+  }
+};
+
+export { addExpense, allExpenses, removeExpense };
