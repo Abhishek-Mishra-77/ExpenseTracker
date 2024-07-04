@@ -16,15 +16,13 @@ const Expenses = () => {
     fetchExpense();
   }, []);
 
-  console.log(expenses);
-
   return (
     <div className="h-80 rounded-lg bg-gray-200 lg:col-span-2">
       <div>
         <h2 className="text-gray-400 flex justify-start p-4">All Tasks</h2>
       </div>
       <hr className="border border-gray-300" />
-      <div className="flex flex-col justify-center items-center gap-4 p-2 overflow-y-auto h-64 border-2 border-red-200 pt-20">
+      <div className="flex flex-col justify-center items-center gap-4 p-2 overflow-y-auto h-64  pt-20">
         {expenses?.map((data) => (
           <div className="w-[90%] p-2 rounded-lg bg-white shadow-md flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
             <div className="flex-1">
