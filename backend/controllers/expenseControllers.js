@@ -2,6 +2,8 @@ import Expense from "../models/expenseModel.js";
 
 const addExpense = async (req, res) => {
   const { title, amount, description, category } = req.body.expense;
+  const userId = req.userId;
+
   try {
     if (!title || !amount || !description || !category) {
       return res.status(404).json({ message: "All field are mandatory" });
@@ -12,6 +14,7 @@ const addExpense = async (req, res) => {
       amount,
       description,
       category,
+      userId: userId,
     });
     return res.status(200).json({ message: "Expense added successfully." });
   } catch (error) {
@@ -20,8 +23,11 @@ const addExpense = async (req, res) => {
 };
 
 const allExpenses = async (req, res) => {
+  const userId = req.userId;
   try {
-    const expenses = await Expense.findAll();
+    const expenses = await Expense.findAll({ where: { userId: userId } });
+    console.log(expenses);
+
     if (!expenses) {
       return res.status(404).json({ message: "No expense found" });
     }
@@ -34,8 +40,11 @@ const allExpenses = async (req, res) => {
 
 const removeExpense = async (req, res) => {
   const expenseId = req.params.id;
+  const userId = req.userId;
   try {
-    const removedExpense = await Expense.findOne({ where: { id: expenseId } });
+    const removedExpense = await Expense.findOne({
+      where: { id: expenseId, userId: userId },
+    });
 
     if (!removedExpense) {
       return res.status(404).json({ message: "Expense Not found." });

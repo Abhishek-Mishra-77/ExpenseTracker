@@ -8,7 +8,10 @@ const Expenses = ({ expenses, onRemoveExpenseHandler }) => {
       <hr className="border border-gray-300" />
       <div className="flex flex-col  items-center gap-4 p-2 overflow-y-auto h-64  ">
         {expenses?.map((data) => (
-          <div className="w-[90%] p-2 rounded-lg bg-white shadow-md flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
+          <div
+            key={data.id}
+            className="w-[90%] p-2 rounded-lg bg-white shadow-md flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4"
+          >
             <div className="flex-1">
               <h3 className="text-lg font-bold text-gray-800">{data.title}</h3>
               <p className="text-sm text-gray-600">{data.description}</p>

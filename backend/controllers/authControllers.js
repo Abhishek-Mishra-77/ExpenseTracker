@@ -1,5 +1,6 @@
 import User from "../models/userModel.js";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 
 const signUpuser = async (req, res) => {
   const { userName, email, password } = req.body.user;
@@ -40,7 +41,15 @@ const signInUser = async (req, res) => {
       return res.status(404).json({ message: "All fields are manadatory." });
     }
 
-    const user = await User.findOne({ where: { email } });
+    // const user = await User.findOne({
+    //   where: { email },
+    //   attributes: { exclude: ["password"] },
+    // });
+
+    const user = await User.findOne({
+      where: { email },
+    });
+
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
@@ -51,10 +60,37 @@ const signInUser = async (req, res) => {
       return res.status(404).json({ message: "Password mismatch." });
     }
 
-    return res.status(200).json({ message: "Login successfully." });
+    const token = jwt.sign(
+      {
+        id: user.id,
+        email: user.email,
+        userName: user.userName,
+      },
+      process.env.SECRET_KEY,
+      { expiresIn: "1h" }
+    );
+
+    return res
+      .status(200)
+      .json({ message: "Login successfully.", token: token, user: user });
   } catch (error) {
     return res.status(404).json({ message: error.message });
   }
 };
 
-export { signUpuser, signInUser };
+const getUserDetails = async (req, res) => {
+  const userId = req.userId;
+  try {
+    const user = await User.findOne({ where: { id: userId } });
+
+    if (!user) {
+      return res.status(404).json({ message: "User Not Found." });
+    }
+
+    return res.status(200).json({ user });
+  } catch (error) {
+    return res.status(404).json({ error: error.message });
+  }
+};
+
+export { signUpuser, signInUser, getUserDetails };

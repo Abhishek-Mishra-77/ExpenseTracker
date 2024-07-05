@@ -63,11 +63,11 @@ const Auth = () => {
         password: "",
         confirmPassword: "",
       }));
+      const { data } = response;
       toast.success("Sign in successfully.");
-      localStorage.setItem("user", JSON.stringify("login"));
+      localStorage.setItem("user", JSON.stringify(data?.token));
       navigate("/home");
     } catch (error) {
-      console.log(error?.response?.data?.message);
       toast.error(error?.response?.data?.message);
     }
   };

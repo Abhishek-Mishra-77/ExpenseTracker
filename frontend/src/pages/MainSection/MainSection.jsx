@@ -16,6 +16,7 @@ const MainSection = () => {
     category: "",
   });
   const [newExpenseModal, setNewExpenseModal] = useState(false);
+  const token = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
     const fetchExpense = async () => {
@@ -28,7 +29,7 @@ const MainSection = () => {
     };
 
     fetchExpense();
-  }, []);
+  }, [token]);
 
   const onExpenseSubmitHandler = async (e) => {
     e.preventDefault();
@@ -39,11 +40,18 @@ const MainSection = () => {
     }
 
     try {
-      await axios.post(`http://${REACT_IP}:${SERVER_PORT}/expense/addexpense`, {
-        expense,
-      });
-
-      setExpenses((prev) => [...prev, expense]);
+      await axios.post(
+        `http://${REACT_IP}:${SERVER_PORT}/expense/addexpense`,
+        {
+          expense,
+        },
+        {
+          headers: {
+            token: token,
+          },
+        }
+      );
+      setExpenses((prev) => (prev ? [...prev, expense] : [expense]));
 
       toast.success("Expense added successfully.");
       setNewExpenseModal(false);
@@ -62,8 +70,14 @@ const MainSection = () => {
 
   const onRemoveExpenseHandler = async (id) => {
     try {
-      await axios.delete(
-        `http://${REACT_IP}:${SERVER_PORT}/expense/removeexpense/${id}`
+      await axios.post(
+        `http://${REACT_IP}:${SERVER_PORT}/expense/removeexpense/${id}`,
+        {},
+        {
+          headers: {
+            token: token,
+          },
+        }
       );
       const updatedExpenses = expenses.filter((data) => data.id != id);
       setExpenses(updatedExpenses);
