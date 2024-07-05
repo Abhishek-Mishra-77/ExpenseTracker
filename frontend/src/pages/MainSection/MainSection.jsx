@@ -5,6 +5,7 @@ import QuickAccess from "../QuickAccess/QuickAccess";
 import ExpensePiChart from "../ExpenseChart/ExpensePiChart";
 import { allExpense, REACT_IP, SERVER_PORT } from "../../services/common";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 import axios from "axios";
 
 const MainSection = () => {
@@ -16,7 +17,7 @@ const MainSection = () => {
     category: "",
   });
   const [newExpenseModal, setNewExpenseModal] = useState(false);
-  const token = JSON.parse(localStorage.getItem("user"));
+  const { userInfo, isLogin } = useSelector((state) => state?.user);
 
   useEffect(() => {
     const fetchExpense = async () => {
@@ -29,7 +30,7 @@ const MainSection = () => {
     };
 
     fetchExpense();
-  }, [token]);
+  }, [isLogin, userInfo]);
 
   const onExpenseSubmitHandler = async (e) => {
     e.preventDefault();
@@ -47,7 +48,7 @@ const MainSection = () => {
         },
         {
           headers: {
-            token: token,
+            token: isLogin,
           },
         }
       );
@@ -75,7 +76,7 @@ const MainSection = () => {
         {},
         {
           headers: {
-            token: token,
+            token: isLogin,
           },
         }
       );

@@ -5,8 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
 import Settings from "./pages/Settings/Settings";
 import TabSection from "./pages/TabSection/TabSection";
+import { useSelector } from "react-redux";
 function App() {
-  const isLogin = JSON.parse(localStorage.getItem("user"));
+  const isLogin = useSelector((state) => state?.user?.isLogin);
   const navigate = useNavigate();
   useEffect(() => {}, [navigate]);
 

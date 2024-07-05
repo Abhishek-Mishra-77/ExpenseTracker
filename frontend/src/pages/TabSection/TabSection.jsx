@@ -1,29 +1,49 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { getUserDetails } from "../../services/common";
+import { useDispatch, useSelector } from "react-redux";
+import { userDetails } from "../../store/userSlice";
 
 const TabSection = () => {
   const location = useLocation()?.pathname;
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state?.user?.userInfo);
+  useEffect(() => {
+    const fetchUser = async () => {
+      const response = await getUserDetails();
+      dispatch(userDetails(response));
+    };
+    fetchUser();
+  }, []);
+
+  const userNameInitial =
+    user && user.userName ? user.userName.charAt(0).toUpperCase() : "";
 
   return (
     <div className="h-screen flex-col justify-between border-e bg-white w-[20%] hidden md:block">
       <div className="sticky inset-x-0 bottom-0 border-t border-gray-100">
-        <a
-          href="#"
-          className="flex items-center gap-2 bg-white p-4 hover:bg-gray-50 sm:flex-col"
-        >
-          <img
-            alt=""
-            src="https://images.unsplash.com/photo-1600486913747-55e5470d6f40?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-            className="size-10 rounded-full object-cover"
-          />
+        <button className="flex items-center justify-center w-full gap-2 bg-white p-4 hover:bg-gray-50 sm:flex-col">
+          {user && user.userName ? (
+            <div className="size-10 rounded-full bg-gray-200 flex items-center justify-center object-cover">
+              <span className="text-lg font-medium">{userNameInitial}</span>
+            </div>
+          ) : (
+            <img
+              alt=""
+              src="https://images.unsplash.com/photo-1600486913747-55e5470d6f40?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+              className="size-10 rounded-full object-cover"
+            />
+          )}
 
           <div>
             <p className="flex text-sm sm:flex sm:flex-col sm:items-center">
-              <strong className="block font-medium">Abhishek Mishra</strong>
-              <span>abhishek@gmail.com </span>
+              <strong className="block font-medium">
+                {user && user.userName?.toUpperCase()}
+              </strong>
+              <span>{user && user.email}</span>
             </p>
           </div>
-        </a>
+        </button>
       </div>
       <div className="px-4 py-6">
         <h1 className="grid h-10 w-[100%] place-content-center rounded-lg bg-gray-200 font-bold  text-gray-600 md:text-sm">

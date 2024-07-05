@@ -5,6 +5,8 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { REACT_IP, SERVER_PORT } from "../../services/common";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { userToken } from "../../store/userSlice";
 const Auth = () => {
   const [isAuthPage, setIsAuthPage] = useState(false);
   const [user, setUser] = useState({
@@ -14,6 +16,7 @@ const Auth = () => {
     confirmPassword: "",
   });
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const onSignUpHandler = async (e) => {
     e.preventDefault();
@@ -65,7 +68,7 @@ const Auth = () => {
       }));
       const { data } = response;
       toast.success("Sign in successfully.");
-      localStorage.setItem("user", JSON.stringify(data?.token));
+      dispatch(userToken(data?.token));
       navigate("/home");
     } catch (error) {
       toast.error(error?.response?.data?.message);

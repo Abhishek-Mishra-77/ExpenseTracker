@@ -1,7 +1,7 @@
 import axios from "axios";
-
 export const REACT_IP = "localhost";
 export const SERVER_PORT = "5000";
+
 const token = JSON.parse(localStorage.getItem("user"));
 export const allExpense = async () => {
   try {
@@ -32,11 +32,8 @@ export const getUserDetails = async () => {
         },
       }
     );
-
-    console.log(response);
+    return response?.data?.user;
   } catch (error) {
     console.log(error);
   }
 };
-
-getUserDetails();
