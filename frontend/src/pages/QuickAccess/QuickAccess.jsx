@@ -1,5 +1,6 @@
 import { FaPlus } from "react-icons/fa6";
 import { FaDownload } from "react-icons/fa";
+import { FaMoneyBillTrendUp } from "react-icons/fa6";
 import AddExpense from "../AddExpenses/AddExpense";
 
 const QuickAccess = ({
@@ -34,8 +35,8 @@ const QuickAccess = ({
           </div>
           <div className="h-16  w-[80%] rounded-lg bg-gray-300 flex justify-center items-center cursor-pointer">
             <div className="flex justify-center items-center">
-              <FaPlus />
-              <h1 className=" ml-2">Daily Expense</h1>
+              <FaMoneyBillTrendUp  />
+              <h1 className=" ml-2"> Buy Premium</h1>
             </div>
           </div>
         </div>
