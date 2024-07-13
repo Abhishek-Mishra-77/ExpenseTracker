@@ -11,8 +11,6 @@ import authRoutes from "./routes/authRoutes.js";
 import exprenseRoutes from "./routes/expenseRoutes.js";
 import premiumRoutes from "./routes/premiumRoutes.js";
 
-
-
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());

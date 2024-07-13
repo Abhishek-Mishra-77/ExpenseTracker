@@ -58,4 +58,12 @@ const removeExpense = async (req, res) => {
   }
 };
 
-export { addExpense, allExpenses, removeExpense };
+const leaderBoard = async (req, res) => {
+  try {
+    return res.status(200).json({ message: "Working" });
+  } catch (error) {
+    return res.status(400).json({ error: error.message });
+  }
+};
+
+export { addExpense, allExpenses, removeExpense, leaderBoard };
