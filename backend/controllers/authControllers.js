@@ -21,7 +21,7 @@ const signUpuser = async (req, res) => {
       userName,
       email,
       password: hashedPassword,
-      isCompleted: false,
+      isPremiumUser: false,
     });
 
     if (!user) {
@@ -65,6 +65,7 @@ const signInUser = async (req, res) => {
         id: user.id,
         email: user.email,
         userName: user.userName,
+        isPremiumUser: false,
       },
       process.env.SECRET_KEY
       // { expiresIn: "1h" }

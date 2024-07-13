@@ -16,9 +16,13 @@ export const userSlice = createSlice({
       state.isLogin = action.payload;
       localStorage.setItem("user", JSON.stringify(action.payload));
     },
+    removeToken: (state, action) => {
+      state.isLogin = "";
+      localStorage.removeItem("user");
+    },
   },
 });
 
-export const { userDetails, userToken } = userSlice.actions;
+export const { userDetails, userToken, removeToken } = userSlice.actions;
 
 export default userSlice.reducer;

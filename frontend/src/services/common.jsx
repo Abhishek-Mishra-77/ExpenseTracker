@@ -15,6 +15,7 @@ export const allExpense = async () => {
       }
     );
     const { expenses } = response?.data;
+
     return expenses;
   } catch (error) {
     console.log(error);

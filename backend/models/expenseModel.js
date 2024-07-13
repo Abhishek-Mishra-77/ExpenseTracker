@@ -18,10 +18,6 @@ const Expense = sequelize.define("expense", {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  isCompleted: {
-    type: Sequelize.BOOLEAN,
-    defaultValue: false,
-  },
 });
 
 export default Expense;
