@@ -66,4 +66,17 @@ const leaderBoard = async (req, res) => {
   }
 };
 
-export { addExpense, allExpenses, removeExpense, leaderBoard };
+const allUserExpense = async (req , res) => {
+  try {
+    const expenses = await Expense.findAll();
+    if(!expenses) {
+      return res.status(404).json({message : "Expense not found."});
+    }
+
+    return res.status(200).json({expenses})
+  } catch (error) {
+    return res.status(400).json({ error: error.message });
+  }
+}
+
+export { addExpense, allExpenses, removeExpense, leaderBoard  , allUserExpense};

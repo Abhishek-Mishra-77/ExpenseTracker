@@ -94,4 +94,17 @@ const getUserDetails = async (req, res) => {
   }
 };
 
-export { signUpuser, signInUser, getUserDetails };
+const allUsers = async (req, res) => {
+  try {
+    const users = await User.findAll();
+    if (!users) {
+      return res.status(400).json({ message: "User not found." });
+    }
+
+    return res.status(200).json({ users });
+  } catch (error) {
+    return res.status(400).json({ error: error.message });
+  }
+};
+
+export { signUpuser, signInUser, getUserDetails, allUsers };

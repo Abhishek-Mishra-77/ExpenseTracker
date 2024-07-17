@@ -15,7 +15,7 @@ export const allExpense = async () => {
       }
     );
     const { expenses } = response?.data;
-
+    console.log(response)
     return expenses;
   } catch (error) {
     console.log(error);
@@ -38,3 +38,42 @@ export const getUserDetails = async () => {
     console.log(error);
   }
 };
+
+export const allUsers = async () => {
+  try {
+    const response = await axios.post(
+      `http://${REACT_IP}:${SERVER_PORT}/auth`,
+      {},
+      {
+        headers: {
+          token: token,
+        },
+      }
+    );
+    const { data } = response;
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
+export const allUserExpenses = async () => {
+  try {
+    const response = await axios.post(
+      `http://${REACT_IP}:${SERVER_PORT}/expense`,
+      {},
+      {
+        headers: {
+          token: token,
+        },
+      }
+    );
+    const { data } = response;
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+allUserExpenses()
