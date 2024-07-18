@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { allUserExpenses, allUsers } from "../../services/common";
+import {
+  allUsers
+} from "../../services/common";
 
 const LeaderBoard = () => {
   const [leaderExpenses, setLeaderExpenses] = useState([]);
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -35,14 +38,14 @@ const LeaderBoard = () => {
                 <div className="p-4 rounded-lg bg-white shadow-lg flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 transform transition-transform duration-300 hover:scale-105">
                   <div className="flex-1">
                     <h3 className="text-lg font-bold text-purple-800">{data.userName}</h3>
-                    <p className="text-sm text-purple-600">{data.title}</p>
+
                   </div>
                   <div className="flex items-center gap-4">
                     <span className="text-lg font-semibold text-purple-800 p-2">
                       ${data.totalExpenses}
                     </span>
-                    <span className="px-4 py-1 rounded-full bg-green-300 text-green-800 text-sm font-semibold cursor-pointer hover:bg-green-400 hover:text-white transition-colors duration-300">
-                      Expense
+                    <span className={`px-4 py-1 rounded-full ${data.isPremiumUser ? "bg-green-300" : "bg-red-300"} text-green-800 text-sm font-semibold cursor-pointer ${data.isPremiumUser ? "hover:bg-green-400" : "hover:bg-green-400"} hover:text-white transition-colors duration-300`}>
+                      {data.isPremiumUser ? "Premium" : "No Premium"}
                     </span>
                   </div>
                 </div>
