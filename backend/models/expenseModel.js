@@ -17,7 +17,7 @@ const Expense = sequelize.define("expense", {
   category: {
     type: Sequelize.STRING,
     allowNull: false,
-  },
+  }
 });
 
 export default Expense;
